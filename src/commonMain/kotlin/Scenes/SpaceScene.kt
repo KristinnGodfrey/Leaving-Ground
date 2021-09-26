@@ -13,7 +13,7 @@ class SpaceSceneDependency(val value: String)
 
 class SpaceScene(val spaceSceneDependency: SpaceSceneDependency, val game: Game) : Scene() {
     @KorgeInternal
-    val player = Player(this, game)
+    val player = Player(this, game).xy(1000, 400)
 
     @KorgeInternal
     override suspend fun Container.sceneInit() {
