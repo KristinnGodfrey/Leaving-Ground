@@ -15,9 +15,10 @@ object GameModule : Module() {
 
     override suspend fun AsyncInjector.configure(): Unit {
         game.views = views()
+        game.resources.load()
 //        mapInstance(game)
         mapInstance(SpaceSceneDependency("Inject to SpaceScene"))
-        mapPrototype { SpaceScene(get()) }
+        mapPrototype { SpaceScene(get(), game) }
     }
 }
 

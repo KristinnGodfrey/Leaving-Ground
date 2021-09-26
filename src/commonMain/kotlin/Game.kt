@@ -1,15 +1,34 @@
+import com.soywiz.korge.view.Sprite
+import com.soywiz.korge.view.SpriteAnimation
 import com.soywiz.korge.view.Views
 import com.soywiz.korim.bitmap.Bitmap
 import com.soywiz.korim.format.readBitmap
 import com.soywiz.korio.file.std.resourcesVfs
 
 class Resources {
-    lateinit var playerIdle: Bitmap
-    lateinit var playerRunning: Bitmap
+    lateinit var playerIdleMap: Bitmap
+    lateinit var playerIdleAnimation: SpriteAnimation
+    lateinit var playerIdle: Sprite
+    lateinit var playerRunningMap: Bitmap
 
     suspend fun load() {
-        playerIdle = resourcesVfs["Idle.png"].readBitmap()
-        playerRunning = resourcesVfs["Run.png"].readBitmap()
+        playerIdleMap = resourcesVfs["Idle.png"].readBitmap()
+
+        playerIdleAnimation = SpriteAnimation(
+            spriteMap = playerIdleMap,
+            spriteWidth = 319,
+            spriteHeight = 486,
+            marginTop = 0,
+            marginLeft = 0,
+            columns = 5,
+            rows = 2,
+            offsetBetweenColumns = 0,
+            offsetBetweenRows = 0,
+        )
+
+        playerIdle = sprite(playerIdleAnimation)
+        
+//        playerRunningMap = resourcesVfs["Run.png"].readBitmap()
     }
 }
 

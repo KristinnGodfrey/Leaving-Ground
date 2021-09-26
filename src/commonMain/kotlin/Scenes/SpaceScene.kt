@@ -11,13 +11,12 @@ import entities.Player
 
 class SpaceSceneDependency(val value: String)
 
-class SpaceScene(val game: Game) : Scene() {
+class SpaceScene(val spaceSceneDependency: SpaceSceneDependency, val game: Game) : Scene() {
     @KorgeInternal
     val player = Player(this, game)
 
     @KorgeInternal
     override suspend fun Container.sceneInit() {
-        game.resources.load()
         sprite(resourcesVfs["skywide.png"].readBitmap()) {}
         val rect1 = solidRect(100, 100, Colors.BLUE).xy(200, 300)
         val rect2 = solidRect(100, 100, Colors.BLUE).xy(350, 300)

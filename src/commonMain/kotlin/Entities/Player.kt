@@ -1,9 +1,9 @@
 package entities
 
 import Game
+import Scenes.SpaceScene
 import com.soywiz.korev.Key
 import com.soywiz.korge.internal.KorgeInternal
-import com.soywiz.korge.scene.Scene
 import com.soywiz.korge.view.Sprite
 import com.soywiz.korge.view.addUpdater
 import com.soywiz.korge.view.anchor
@@ -11,7 +11,7 @@ import com.soywiz.korge.view.hitShape
 import com.soywiz.korma.geom.vector.circle
 
 @KorgeInternal
-class Player(val scene: Scene, val game: Game) : Sprite() {
+class Player(val spaceScene: SpaceScene, val game: Game) : Sprite(game.resources.playerIdle) {
 
     init {
         name = "player"
@@ -21,7 +21,7 @@ class Player(val scene: Scene, val game: Game) : Sprite() {
         }
 
         addUpdater {
-            val input = scene.stage.input
+            val input = stage?.input
             if (input != null) {
                 if (input.keys.pressing(Key.A)) {
                     x -= 5
