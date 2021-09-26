@@ -1,18 +1,27 @@
 package entities
 
-import Scenes.SpaceScene
+import Game
 import com.soywiz.korev.Key
 import com.soywiz.korge.internal.KorgeInternal
-import com.soywiz.korge.view.Circle
+import com.soywiz.korge.scene.Scene
+import com.soywiz.korge.view.Sprite
 import com.soywiz.korge.view.addUpdater
-import com.soywiz.korim.color.Colors
+import com.soywiz.korge.view.anchor
+import com.soywiz.korge.view.hitShape
+import com.soywiz.korma.geom.vector.circle
 
 @KorgeInternal
-class Player(val spaceScene: SpaceScene) : Circle(100.0, Colors.RED, Colors.BLACK, 10.0) {
+class Player(val scene: Scene, val game: Game) : Sprite() {
 
     init {
+        name = "player"
+        anchor(0.5, 0.5)
+        hitShape {
+            circle(100, 100, 10)
+        }
+
         addUpdater {
-            val input = stage?.input
+            val input = scene.stage.input
             if (input != null) {
                 if (input.keys.pressing(Key.A)) {
                     x -= 5

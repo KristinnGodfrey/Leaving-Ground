@@ -1,5 +1,6 @@
 package Scenes
 
+import Game
 import com.soywiz.korge.internal.KorgeInternal
 import com.soywiz.korge.scene.Scene
 import com.soywiz.korge.view.*
@@ -10,12 +11,13 @@ import entities.Player
 
 class SpaceSceneDependency(val value: String)
 
-class SpaceScene(val spaceSceneDependency: SpaceSceneDependency) : Scene() {
+class SpaceScene(val game: Game) : Scene() {
     @KorgeInternal
-    val player = Player(this)
+    val player = Player(this, game)
 
     @KorgeInternal
     override suspend fun Container.sceneInit() {
+        game.resources.load()
         sprite(resourcesVfs["skywide.png"].readBitmap()) {}
         val rect1 = solidRect(100, 100, Colors.BLUE).xy(200, 300)
         val rect2 = solidRect(100, 100, Colors.BLUE).xy(350, 300)
@@ -24,7 +26,6 @@ class SpaceScene(val spaceSceneDependency: SpaceSceneDependency) : Scene() {
         addChild(player)
         addChild(rect1)
         addChild(rect2)
-
 
         player.addUpdater {
             if (collidesWith(rectList)) {
