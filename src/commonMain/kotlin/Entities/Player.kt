@@ -25,76 +25,72 @@ class Player(val spaceScene: SpaceScene, val game: Game) : Sprite() {
 //            y += 5
             val input = game.views.keys
 
-            val index = when {
-                input.justPressed(Key.A) and input.justPressed(Key.SPACE) -> jumpLeftUp()
-                input.justPressed(Key.D) and input.justPressed(Key.SPACE) -> jumpRightUp()
-                input.justPressed(Key.A) -> moveLeft()
-                input.justPressed(Key.D) -> moveRight()
-                input.justPressed(Key.W) -> moveUp()
-                input.justPressed(Key.S) -> moveDown()
-                input.justPressed(Key.SPACE) -> jump()
+            when {
+                input.pressing(Key.A) and input.pressing(Key.SPACE) -> jumpLeftUp()
+                input.pressing(Key.D) and input.pressing(Key.SPACE) -> jumpRightUp()
+                input.pressing(Key.A) and input.pressing(Key.S) -> moveDownLeft()
+                input.pressing(Key.D) and input.pressing(Key.S) -> moveDownRight()
+                input.pressing(Key.A) -> moveLeft()
+                input.pressing(Key.D) -> moveRight()
+                input.pressing(Key.S) -> moveDown()
+                input.pressing(Key.SPACE) -> jump()
                 else -> idle()
             }
-
-
-            if (!a or !d or !w or !s or !j) {
-                playAnimation(game.resources.playerIdleAnimation)
-            }
-            if (j) {
-                y -= 10
-                playAnimationLooped(game.resources.playerJumpingAnimation)
-            }
-            if (j and a) {
-                y -= 10
-                x -= 10
-            } else if (a) {
-                x -= 5
-                playAnimationLooped(game.resources.playerRunningAnimation)
-            }
-            if (j and d) {
-                y -= 10
-                x += 10
-            } else if (d) {
-                x += 5
-                playAnimationLooped(game.resources.playerRunningAnimation)
-            }
-            if (w) {
-                y -= 5
-                playAnimationLooped(game.resources.playerRunningAnimation)
-            }
-            if (s) {
-                y += 5
-                playAnimationLooped(game.resources.playerRunningAnimation)
-            }
-
         }
     }
 
-    private fun jump(): Any {
-
+    private fun moveDownRight() {
+        y += 5
+        x += 5
+        playAnimationLooped(game.resources.playerRunningAnimation)
     }
 
-    private fun moveDown(): Any {
-
+    private fun moveDownLeft() {
+        y += 5
+        x -= 5
+        playAnimationLooped(game.resources.playerRunningAnimation)
     }
 
-    private fun moveUp(): Any {
-
+    private fun idle() {
+        playAnimation(game.resources.playerIdleAnimation)
     }
 
-    private fun moveRight(): Any {
-
+    private fun jump() {
+        y -= 10
+        playAnimationLooped(game.resources.playerJumpingAnimation)
     }
 
-    private fun jumpRightUp(): Any {
-
+    private fun moveDown() {
+        y += 5
+        playAnimationLooped(game.resources.playerRunningAnimation)
     }
 
-    private fun jumpLeftUp(): Any {
-
+    private fun moveUp() {
+        y -= 5
+        playAnimationLooped(game.resources.playerRunningAnimation)
     }
 
-    private fun moveLeft(): Any {
-
+    private fun moveLeft() {
+        x -= 5
+        playAnimationLooped(game.resources.playerRunningAnimation)
     }
+
+    private fun moveRight() {
+        x += 5
+        playAnimationLooped(game.resources.playerRunningAnimation)
+    }
+
+    private fun jumpRightUp() {
+        y -= 10
+        x += 10
+        playAnimationLooped(game.resources.playerJumpingAnimation)
+    }
+
+    private fun jumpLeftUp() {
+        y -= 10
+        x -= 10
+        playAnimationLooped(game.resources.playerJumpingAnimation)
+    }
+
+
 }
