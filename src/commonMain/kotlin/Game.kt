@@ -25,9 +25,9 @@ class Resources {
             offsetBetweenColumns = 0,
             offsetBetweenRows = 0,
         )
+//
+//        playerIdle = sprite(playerIdleAnimation)
 
-        playerIdle = sprite(playerIdleAnimation)
-        
 //        playerRunningMap = resourcesVfs["Run.png"].readBitmap()
     }
 }
