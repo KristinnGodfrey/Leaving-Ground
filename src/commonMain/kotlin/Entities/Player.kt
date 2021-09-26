@@ -11,6 +11,7 @@ import com.soywiz.korma.geom.vector.circle
 class Player(val spaceScene: SpaceScene, val game: Game) : Sprite() {
     val playerIdle: SpriteAnimation = game.resources.playerIdleAnimation
     val playerRunning: SpriteAnimation = game.resources.playerRunningAnimation
+    val playerJumping: SpriteAnimation = game.resources.playerJumpingAnimation
 
     init {
         name = "player"
@@ -21,26 +22,39 @@ class Player(val spaceScene: SpaceScene, val game: Game) : Sprite() {
 
         // TODO: rotation = 180.0.degrees not working
         addUpdater {
-            val input = game.views.input
-//            println(input)
-            val a = input.keys.pressing(Key.A)
-            val d = input.keys.pressing(Key.D)
-            val w = input.keys.pressing(Key.W)
-            val s = input.keys.pressing(Key.S)
+//            y += 5
+            val input = game.views.keys
 
-//            println(a)
-//            println(d)
-//            println(w)
-//            println(s)
-            if (!a or !d or !w or !s) {
+            val index = when {
+                input.justPressed(Key.A) and input.justPressed(Key.SPACE) -> jumpLeftUp()
+                input.justPressed(Key.D) and input.justPressed(Key.SPACE) -> jumpRightUp()
+                input.justPressed(Key.A) -> moveLeft()
+                input.justPressed(Key.D) -> moveRight()
+                input.justPressed(Key.W) -> moveUp()
+                input.justPressed(Key.S) -> moveDown()
+                input.justPressed(Key.SPACE) -> jump()
+                else -> idle()
+            }
+
+
+            if (!a or !d or !w or !s or !j) {
                 playAnimation(game.resources.playerIdleAnimation)
             }
-            if (a) {
+            if (j) {
+                y -= 10
+                playAnimationLooped(game.resources.playerJumpingAnimation)
+            }
+            if (j and a) {
+                y -= 10
+                x -= 10
+            } else if (a) {
                 x -= 5
                 playAnimationLooped(game.resources.playerRunningAnimation)
-//                    rotation = 180.0.degrees
             }
-            if (d) {
+            if (j and d) {
+                y -= 10
+                x += 10
+            } else if (d) {
                 x += 5
                 playAnimationLooped(game.resources.playerRunningAnimation)
             }
@@ -53,38 +67,34 @@ class Player(val spaceScene: SpaceScene, val game: Game) : Sprite() {
                 playAnimationLooped(game.resources.playerRunningAnimation)
             }
 
-
-//            playAnimationLooped(game.resources.playerIdleAnimation)
-
-
         }
-//
-        //                for (child in parent?.children!!) {
-//                    println(child)
-//                    if (collidesWithShape(child)) {
-//                        solid.x = 300.0
-//                        solid.y = 1000.0
-////                        x = 0.0
-////                        y = 0.0
-//                    }
-//                }
-//
-//                if (x < 0) {
-//                    x = 0.0
-//                }
-//                if (y < 22) {
-//                    y = 22.0
-//                }
-//
-//                if (x + width >= 1280) {
-//                    x = 1280 - width
-//                }
-//
-//                if (y + height >= 768) {
-//                    y = 768 - height
-//                }
-//}
-//}
-//}
+    }
+
+    private fun jump(): Any {
+
+    }
+
+    private fun moveDown(): Any {
+
+    }
+
+    private fun moveUp(): Any {
+
+    }
+
+    private fun moveRight(): Any {
+
+    }
+
+    private fun jumpRightUp(): Any {
+
+    }
+
+    private fun jumpLeftUp(): Any {
+
+    }
+
+    private fun moveLeft(): Any {
+
     }
 }

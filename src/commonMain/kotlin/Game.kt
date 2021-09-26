@@ -7,12 +7,14 @@ class Resources {
     //    lateinit var playerIdleMap: Bitmap
     lateinit var playerIdleAnimation: SpriteAnimation
     lateinit var playerRunningAnimation: SpriteAnimation
+    lateinit var playerJumpingAnimation: SpriteAnimation
 //    lateinit var playerIdle: Sprite
 //    lateinit var playerRunningMap: Bitmap
 
     suspend fun load() {
         val playerIdleMap = resourcesVfs["Idle.png"].readBitmap()
         val playerRunningMap = resourcesVfs["Running.png"].readBitmap()
+        val playerJumpingMap = resourcesVfs["Jumping.png"].readBitmap()
 
         playerIdleAnimation = SpriteAnimation(
             spriteMap = playerIdleMap,
@@ -29,6 +31,17 @@ class Resources {
             spriteMap = playerRunningMap,
             spriteWidth = 2075 / 5,
             spriteHeight = 1014 / 2,
+            marginTop = 0,
+            marginLeft = 0,
+            columns = 5,
+            rows = 2,
+            offsetBetweenColumns = 0,
+            offsetBetweenRows = 0,
+        )
+        playerJumpingAnimation = SpriteAnimation(
+            spriteMap = playerJumpingMap,
+            spriteWidth = 2013 / 5,
+            spriteHeight = 1072 / 2,
             marginTop = 0,
             marginLeft = 0,
             columns = 5,
