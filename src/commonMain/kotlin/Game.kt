@@ -1,11 +1,13 @@
 import com.soywiz.korge.view.Image
 import com.soywiz.korge.view.SpriteAnimation
 import com.soywiz.korge.view.Views
+import com.soywiz.korge.view.position
 import com.soywiz.korim.format.readBitmap
 import com.soywiz.korio.file.std.resourcesVfs
 
 class Resources {
     //    lateinit var playerIdleMap: Bitmap
+    lateinit var bgImage: Image
     lateinit var playerIdleAnimation: SpriteAnimation
     lateinit var playerRunningAnimation: SpriteAnimation
     lateinit var playerJumpingAnimation: SpriteAnimation
@@ -16,6 +18,7 @@ class Resources {
 //    lateinit var playerRunningMap: Bitmap
 
     suspend fun load() {
+        var bgImageMap = resourcesVfs["sky.png"].readBitmap()
         val playerIdleMap = resourcesVfs["Idle.png"].readBitmap()
         val playerRunningMap = resourcesVfs["Running.png"].readBitmap()
         val playerJumpingMap = resourcesVfs["Jumping.png"].readBitmap()
@@ -24,7 +27,11 @@ class Resources {
 //        val cloud3Map = resourcesVfs["cloud3.PNG"].readBitmap()
 
 //        cloud1 = Sprite(cloud1Map, 0.5, 0.5, null, false)
-        cloud1 = Image(cloud1Map)
+        bgImage = Image(bgImageMap)
+
+        cloud1 = Image(cloud1Map).apply {
+            position(1200, 1600)
+        }
 
         playerIdleAnimation = SpriteAnimation(
             spriteMap = playerIdleMap,
