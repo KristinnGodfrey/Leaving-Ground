@@ -20,9 +20,8 @@ class Player(val spaceScene: SpaceScene, val game: Game) : Sprite() {
         scale(0.5)
         playAnimationLooped(game.resources.playerIdleAnimation)
 
-        // TODO: rotation = 180.0.degrees not working
+        // TODO: rotation = 180.0.degrees
         addUpdater {
-//            y += 5
             val input = game.views.keys
 
             when {
@@ -42,55 +41,65 @@ class Player(val spaceScene: SpaceScene, val game: Game) : Sprite() {
     private fun moveDownRight() {
         y += 5
         x += 5
-        playAnimationLooped(game.resources.playerRunningAnimation)
+        playAnimationLooped(playerRunning)
     }
 
     private fun moveDownLeft() {
         y += 5
         x -= 5
-        playAnimationLooped(game.resources.playerRunningAnimation)
+        playAnimationLooped(playerRunning)
     }
 
     private fun idle() {
-        playAnimation(game.resources.playerIdleAnimation)
+        playAnimation(playerIdle)
     }
 
     private fun jump() {
         y -= 10
-        playAnimationLooped(game.resources.playerJumpingAnimation)
+        playAnimationLooped(playerJumping)
     }
 
     private fun moveDown() {
         y += 5
-        playAnimationLooped(game.resources.playerRunningAnimation)
+        playAnimationLooped(playerRunning)
     }
 
     private fun moveUp() {
         y -= 5
-        playAnimationLooped(game.resources.playerRunningAnimation)
+        playAnimationLooped(playerRunning)
+    }
+
+    private fun moveUpLeft() {
+        x -= 5
+        y -= 5
+        playAnimationLooped(playerRunning)
+    }
+
+    private fun moveUpRight() {
+        x += 5
+        y -= 5
+        playAnimationLooped(playerRunning)
     }
 
     private fun moveLeft() {
         x -= 5
-        playAnimationLooped(game.resources.playerRunningAnimation)
+        playAnimationLooped(playerRunning)
     }
 
     private fun moveRight() {
         x += 5
-        playAnimationLooped(game.resources.playerRunningAnimation)
+        playAnimationLooped(playerRunning)
     }
 
     private fun jumpRightUp() {
         y -= 10
         x += 10
-        playAnimationLooped(game.resources.playerJumpingAnimation)
+        playAnimationLooped(playerJumping)
     }
 
     private fun jumpLeftUp() {
         y -= 10
         x -= 10
-        playAnimationLooped(game.resources.playerJumpingAnimation)
+        playAnimationLooped(playerJumping)
     }
-
-
 }

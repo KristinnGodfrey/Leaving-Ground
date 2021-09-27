@@ -1,3 +1,4 @@
+import com.soywiz.korge.view.Image
 import com.soywiz.korge.view.SpriteAnimation
 import com.soywiz.korge.view.Views
 import com.soywiz.korim.format.readBitmap
@@ -8,6 +9,9 @@ class Resources {
     lateinit var playerIdleAnimation: SpriteAnimation
     lateinit var playerRunningAnimation: SpriteAnimation
     lateinit var playerJumpingAnimation: SpriteAnimation
+    lateinit var cloud1: Image
+//    lateinit var cloud2: Sprite
+//    lateinit var cloud3: Sprite
 //    lateinit var playerIdle: Sprite
 //    lateinit var playerRunningMap: Bitmap
 
@@ -15,6 +19,12 @@ class Resources {
         val playerIdleMap = resourcesVfs["Idle.png"].readBitmap()
         val playerRunningMap = resourcesVfs["Running.png"].readBitmap()
         val playerJumpingMap = resourcesVfs["Jumping.png"].readBitmap()
+        val cloud1Map = resourcesVfs["cloud1.png"].readBitmap()
+//        val cloud2Map = resourcesVfs["cloud2.PNG"].readBitmap()
+//        val cloud3Map = resourcesVfs["cloud3.PNG"].readBitmap()
+
+//        cloud1 = Sprite(cloud1Map, 0.5, 0.5, null, false)
+        cloud1 = Image(cloud1Map)
 
         playerIdleAnimation = SpriteAnimation(
             spriteMap = playerIdleMap,

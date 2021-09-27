@@ -7,6 +7,7 @@ import com.soywiz.korge.view.*
 import com.soywiz.korim.color.Colors
 import com.soywiz.korim.format.readBitmap
 import com.soywiz.korio.file.std.resourcesVfs
+import entities.Cloud
 import entities.Player
 
 class SpaceSceneDependency(val value: String)
@@ -14,6 +15,9 @@ class SpaceSceneDependency(val value: String)
 class SpaceScene(val spaceSceneDependency: SpaceSceneDependency, val game: Game) : Scene() {
     @KorgeInternal
     val player = Player(this, game).xy(1000, 400)
+
+    @KorgeInternal
+    val cloud = Cloud(this, game).xy(1000, 600)
 
     @KorgeInternal
     override suspend fun Container.sceneInit() {
@@ -25,12 +29,12 @@ class SpaceScene(val spaceSceneDependency: SpaceSceneDependency, val game: Game)
         addChild(player)
         addChild(rect1)
         addChild(rect2)
+        addChild(cloud)
 
         player.addUpdater {
             if (collidesWith(rectList)) {
                 player.xy(0, 0)
             }
         }
-
     }
 }
